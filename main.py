@@ -2,20 +2,14 @@ from validadores import *
 from persona import Persona
 import time, os, pwinput
 
-loading_list = []
+lista_carga = []
 diccionario_datos = {}
 tabs_texto = 8
-tabs_loading = 6
-tabs_loading_text = 9
-tabs_texto_menu = 2
+tabs_carga = 6
+tabs_carga_texto = 9
+tabs_texto_menu = 9
+tabs_marco_menu = 7
 
-os.system("cls")
-
-print("\n \n" + "\t" * tabs_texto + "Autenticarse.")
-usuario = input("\n \n" + "\t" * tabs_texto + "Usuario: " )
-contrasena = pwinput.pwinput(prompt="\t" * tabs_texto + "Contraseña: ", mask="*")
-
-os.system("cls")
 
 def ingresar():
 
@@ -75,51 +69,58 @@ def modificar():
     nuevo_usuario = input("Ingrese nuevo usuario: ")
     nueva_clave = pwinput.pwinput(prompt="Ingrese nueva clave: ", mask="*")
     
-    dict_actualizada = {"R.U.T": nuevo_rut, "Nombre": nuevo_nombre, "Fecha de nacimiento": nueva_fecha_nac, "Ciudad": nueva_ciudad, "Estado": nuevo_estado, "Email": nuevo_email, "Usuario": nuevo_usuario, "Clave": nueva_clave}
+    actualizado = {"R.U.T": nuevo_rut, "Nombre": nuevo_nombre, "Fecha de nacimiento": nueva_fecha_nac, "Ciudad": nueva_ciudad, "Estado": nuevo_estado, "Email": nuevo_email, "Usuario": nuevo_usuario, "Clave": nueva_clave}
     
-    return dict_actualizada
+    return actualizado
+
+
+os.system("cls")
+
+print("\n \n" + "\t" * tabs_texto + "Autenticarse.")
+usuario = input("\n \n" + "\t" * tabs_texto + "Usuario: " )
+contrasena = pwinput.pwinput(prompt="\t" * tabs_texto + "Contraseña: ", mask="*")
 
 os.system("cls")
 
 for i in range(100 + 1):
     time.sleep(0.1)
     os.system("cls")
-    print("\n \n" + "\t" * tabs_loading_text + str(i) + "%")
+    print("\n \n" + "\t" * tabs_carga_texto + str(i) + "%")
     if i != 0:
         if i % 10 == 0:
-            loading_list.append("🟩")
-    print("\n" + "\t" * tabs_loading + str(loading_list))
+            lista_carga.append("🟩")
+    print("\n" + "\t" * tabs_carga + str(lista_carga))
 
 #Hacer menu del crud.
 while True:
     os.system("cls")
-    print("----------------------------------------------")
-    print("\t" * tabs_texto_menu + "Menu")
-    print("----------------------------------------------")
+    print("\t" * tabs_marco_menu + "----------------------------------------------")
+    print("\t" * tabs_texto_menu + "   Menu")
+    print("\t" * tabs_marco_menu + "----------------------------------------------")
     print("\t" * tabs_texto_menu + "1. Ingresar")
-    print("----------------------------------------------")
+    print("\t" * tabs_marco_menu + "----------------------------------------------")
     print("\t" * tabs_texto_menu + "2. Modificar")
-    print("----------------------------------------------")
+    print("\t" * tabs_marco_menu + "----------------------------------------------")
     print("\t" * tabs_texto_menu + "3. Listar")
-    print("----------------------------------------------")
+    print("\t" * tabs_marco_menu + "----------------------------------------------")
     print("\t" * tabs_texto_menu + "4. Eliminar")
-    print("----------------------------------------------")
+    print("\t" * tabs_marco_menu + "----------------------------------------------")
     print("\t" * tabs_texto_menu + "5. Salir")
-    print("----------------------------------------------")
+    print("\t" * tabs_marco_menu + "----------------------------------------------")
     opcion = int(input("\t" * tabs_texto_menu +" Opcion: "))
 
     if opcion == 1:
         os.system("cls")
-        diccionario_datos = ingresar()
+        datos_persona = ingresar()
     elif opcion == 2:
         os.system("cls")
-        diccionario_datos_actualizados = modificar()
-        diccionario_datos = persona.actualizar_persona(diccionario_datos_actualizados, diccionario_datos)
+        datos_actualizados = modificar()
+        datos_persona = persona.actualizar_persona(datos_actualizados, datos_persona)
         input("Presiona enter para continuar.")
     elif opcion == 3:
         os.system("cls")
-        persona.mostrar_persona(diccionario_datos)
-        input("Presiona enter para continuar.")
+        persona.mostrar_persona(datos_persona)
+        input("\t" * 7 + "Presiona enter para continuar.")
     elif opcion == 4:
         os.system("cls")
         del persona

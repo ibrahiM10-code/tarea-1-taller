@@ -10,8 +10,9 @@ class Persona:
         self.clave = clave
         
     def mostrar_persona(self, datos):
+        print("\n")
         for items in datos:
-            print(f"{items}: {datos[items]}")
+            print("\t" * 7 + f"{items}: {datos[items]}")
 
     def actualizar_persona(self, datos_actualizados, datos):
         datos = datos_actualizados
