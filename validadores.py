@@ -30,16 +30,27 @@ def validaRut(rut):
     
 
 def validaEmail(email):
-   
-    validador = "xxx.xx"
-    mail = email.split("@")[-1].split(".")[0] #gmail
-    mail2 = email.split("@")[-1].split(".")[1] #com
-    val = validador.split(".")[-1] #xx
-    val2 = validador.split(".")[-2] #xxx
-    
-    # print(mail, mail2, val, val2)
 
-    if len(mail) > len(val2) and len(mail2) >= len(val):
-        return True
+    validador = "xxx.xx"
+
+    if "@" in email and "." in email:
+
+        mail = email.split("@")[-1].split(".")[0] #gmail
+        mail2 = email.split("@")[-1].split(".")[1] #com
+        val = validador.split(".")[0] #xxx
+        val2 = validador.split(".")[1] #xx
+        try: 
+            if len(mail) >= len(val) and len(mail2) >= len(val2):
+                return True
+            else: 
+                return False
+        except IndexError:
+            print("Los correos deben contener un a @, una direccion de email, y un .com o .cl")
     else:
         return False
+    
+
+
+
+
+print(validaEmail("ibrahimmuhammad233@hotmail.com"))
